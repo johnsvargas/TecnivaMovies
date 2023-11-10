@@ -5,11 +5,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
+import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.johnsapps.tecnivamovies.databinding.FragmentSearchMovieBinding
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import com.johnsapps.tecnivamovies.R
+import com.johnsapps.tecnivamovies.ui.Constants
 import com.johnsapps.tecnivamovies.ui.searchMovie.viewModel.SearchMovieViewModel
 import com.johnsapps.tecnivamovies.ui.utils.RecyclerViewOnScroll
 import dagger.hilt.android.AndroidEntryPoint
@@ -22,7 +26,9 @@ class SearchMovieFragment: Fragment() {
     private lateinit var adapter: MovieItemUIAdapter
     private var isLastPage: Boolean = false
     private var isLoading: Boolean = false
-
+    private val navController by lazy {
+        this.findNavController()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -81,8 +87,15 @@ class SearchMovieFragment: Fragment() {
     private fun setUpRecyclerView() {
        adapter = MovieItemUIAdapter(
             arrayListOf(),
-            onClick = {
-
+            onClick = { mediaVideo ->
+                val title = if(mediaVideo.title.isNullOrEmpty()) mediaVideo.name else mediaVideo.title
+                val bundle = Bundle().apply {
+                    putString(Constants.TYPE_OF_VIDEO , mediaVideo.mediaType)
+                    putLong(Constants.ID_VIDEO , mediaVideo.id)
+                    putString(Constants.URL_POSTER , mediaVideo.getPosterImage())
+                    putString(Constants.TITLE , title)
+                }
+                navigateVideoDetail(bundle)
             })
         binding.rvListMovies.layoutManager = GridLayoutManager(requireContext(),2,)
         binding.rvListMovies.adapter = adapter
@@ -100,6 +113,10 @@ class SearchMovieFragment: Fragment() {
                 viewModel.getListMovie()
             }
         })
+    }
+
+    private fun navigateVideoDetail(bundle: Bundle){
+        navController.navigate(R.id.action_searchMovieFragment_to_detailMovieFragment,bundle)
     }
 
     override fun onDestroyView() {
