@@ -2,35 +2,40 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background_movies"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/input_dashboard_find"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/grid_3"
         android:layout_marginHorizontal="@dimen/grid_3"
+        android:layout_marginTop="@dimen/grid_3"
+        app:boxBackgroundColor="#232427"
         android:padding="@dimen/grid_1"
-        app:boxCornerRadiusTopStart="@dimen/button_radius_corner"
-        app:boxCornerRadiusBottomStart="@dimen/button_radius_corner"
         app:boxCornerRadiusBottomEnd="@dimen/button_radius_corner"
+        app:boxCornerRadiusBottomStart="@dimen/button_radius_corner"
         app:boxCornerRadiusTopEnd="@dimen/button_radius_corner"
-        app:boxStrokeColor="#0040FF"
+        app:boxCornerRadiusTopStart="@dimen/button_radius_corner"
+        app:boxStrokeWidth="1dp"
+        app:boxStrokeColor="@color/hint_color"
         app:hintEnabled="false"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintTop_toTopOf="parent">
+
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/et_dashboard_find"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:drawableStart="@drawable/ic_outline_search_24"
+            android:drawablePadding="@dimen/grid_2"
+            android:hint="@string/hint_search_movie"
             android:imeOptions="actionSearch"
-            android:drawableStart="@null"
             android:inputType="textPersonName"
-            android:textColorHighlight="#2259FF"
             android:textColor="@color/white"
-            android:textColorHint="#BCBCBC"
-            android:hint="Buscar pelicula" />
+            android:textColorHint="@color/hint_color" />
     </com.google.android.material.textfield.TextInputLayout>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_list_movies"

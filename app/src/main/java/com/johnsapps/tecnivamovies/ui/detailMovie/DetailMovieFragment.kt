@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.navArgs
 import com.johnsapps.tecnivamovies.data.model.MovieNow
 import com.johnsapps.tecnivamovies.data.model.TvSeriesNow
 import com.johnsapps.tecnivamovies.databinding.FragmentDetailMovieBinding
@@ -18,6 +19,7 @@ class DetailMovieFragment:Fragment() {
     private var _binding: FragmentDetailMovieBinding? = null
     private val binding get() = _binding!!
     private val viewModel: DetailMovieViewModel by viewModels()
+    private val args: DetailMovieFragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -30,11 +32,9 @@ class DetailMovieFragment:Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        savedInstanceState?.let {
-            viewModel.setBundle(it)
-        }
+        viewModel.setBundle(args.typeOfVideo,args.idVideo)
         initObservers()
-        initUI()
+        initUI(args.urlPoster, args.title)
     }
 
     private fun initObservers() {
@@ -48,19 +48,17 @@ class DetailMovieFragment:Fragment() {
         viewModel.detailTvSeries.observe(viewLifecycleOwner){
             setDataTvSerieInView(it)
         }
-
-        viewModel.urlPoster.observe(viewLifecycleOwner){
-            setPosterImage(it)
-        }
-        viewModel.title.observe(viewLifecycleOwner){
-            binding.toolbar.title = it
-        }
     }
 
-    private fun initUI(){
-        binding.toolbar.setNavigationOnClickListener {
-            activity?.onBackPressedDispatcher?.onBackPressed()
+    private fun initUI(urlPoster: String, title: String){
+        binding.run {
+            toolbar.title = title
+            tvDetailOriginalTitle.text = title
+            toolbar.setNavigationOnClickListener {
+                activity?.onBackPressedDispatcher?.onBackPressed()
+            }
         }
+        setPosterImage(urlPoster)
     }
     private fun setPosterImage(imageUrl: String){
         Picasso

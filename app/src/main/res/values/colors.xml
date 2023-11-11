@@ -4,8 +4,13 @@
     <color name="blue_500">#303F9F</color>
     <color name="blue_700">#303F9F</color>
     <color name="teal_200">#2196F3</color>
+    <color name="teal_500">#03A9F4</color>
     <color name="teal_700">#303F9F</color>
+    <color name="red_500">#F44336</color>
+    <color name="red_700">#D32F2F</color>
     <color name="black">#FF000000</color>
+    <color name="black_100">#272727</color>
+    <color name="hint_color">#BCBCBC</color>
     <color name="black_transparent">#88000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="gray_white">#474747</color>

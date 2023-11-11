@@ -18,5 +18,18 @@
         android:id="@+id/detailMovieFragment"
         android:name="com.johnsapps.tecnivamovies.ui.detailMovie.DetailMovieFragment"
         android:label="DetailMovieFragment"
-        tools:layout="@layout/fragment_detail_movie"/>
+        tools:layout="@layout/fragment_detail_movie">
+        <argument
+            android:name="typeOfVideo"
+            app:argType="string" />
+        <argument
+            android:name="idVideo"
+            app:argType="long" />
+        <argument
+            android:name="urlPoster"
+            app:argType="string" />
+        <argument
+            android:name="title"
+            app:argType="string" />
+    </fragment>
 </navigation>

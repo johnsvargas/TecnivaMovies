@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">TecnivaMovies</string>
+    <string name="hint_search_movie">Buscar pelicula</string>
     <string name="label_detail_description">Descripcion</string>
     <string name="label_detail_titulo_original">Titulo Original</string>
     <string name="label_detail_average">Calificación</string>

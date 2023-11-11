@@ -1,6 +1,6 @@
 package com.johnsapps.tecnivamovies.ui.detailMovie
 
-import android.os.Bundle
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -26,16 +26,11 @@ class DetailMovieViewModel @Inject constructor(
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
     private var _typeOfVideo: String = ""
-    private val _urlPoster: MutableLiveData<String> = MutableLiveData()
-    val urlPoster: LiveData<String> =  _urlPoster
     private var _idVideo: Long = 0
-    private val _title: MutableLiveData<String> = MutableLiveData()
-    val title: LiveData<String> =  _title
-    fun setBundle(bundle: Bundle) {
-        _typeOfVideo =  bundle.getString(Constants.TYPE_OF_VIDEO)?:""
-        _urlPoster.value = bundle.getString(Constants.URL_POSTER,"")
-        _idVideo = bundle.getLong(Constants.ID_VIDEO,0)
-        _title.value = bundle.getString(Constants.TITLE,"")
+
+    fun setBundle(typeVideo:String, idVideo: Long) {
+        _typeOfVideo =  typeVideo
+        _idVideo = idVideo
         getData()
     }
 
@@ -46,16 +41,32 @@ class DetailMovieViewModel @Inject constructor(
         }
     }
     private fun getDetailMovie(id:Long){
+        _isLoading.value = true
         viewModelScope.launch {
-            val response = useCase.getDetailMovie(id)
-            _detailMovie.postValue(response)
+            try {
+                val response = useCase.getDetailMovie(id)
+                _detailMovie.postValue(response)
+                _isLoading.value = false
+            } catch (e: Exception) {
+                Log.e("Error", e.message.toString())
+                _isLoading.value = false
+            }
+
         }
     }
 
     private fun getDetailTvSeries(id:Long){
+        _isLoading.value = true
         viewModelScope.launch {
-            val response = useCase.getDetailTvSeries(id)
-            _detailTvSeries.postValue(response)
+            try {
+                val response = useCase.getDetailTvSeries(id)
+                _detailTvSeries.postValue(response)
+                _isLoading.value = false
+            } catch(e: Exception) {
+                Log.e("Error", e.message.toString())
+                _isLoading.value = false
+            }
+
         }
 
     }

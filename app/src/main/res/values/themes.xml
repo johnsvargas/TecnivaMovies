@@ -1,8 +1,23 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <!-- Base application theme. -->
     <style name="Base.Theme.TecnivaMovies" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="colorPrimary">@color/blue_500</item>
+        <item name="colorPrimaryVariant">@color/blue_700</item>
+        <item name="colorOnPrimary">@color/hint_color</item>
+        <item name="colorSecondary">@color/teal_500</item>
+        <item name="colorSecondaryVariant">@color/teal_700</item>
+        <item name="colorOnSecondary">@color/hint_color</item>
+        <item name="background">@drawable/background_movies</item>
+        <item name="android:colorBackground">@color/black_100</item>
+        <item name="colorSurface">@color/black_100</item>
+        <item name="colorError">@color/red_500</item>
+        <item name="android:textColorPrimary">@color/white</item>
+        <item name="android:titleTextColor">@color/white</item>
+        <item name="android:subtitleTextColor">@color/white</item>
+        <item name="android:editTextColor">@color/white</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textColorSecondary">@color/hint_color</item>
     </style>
 
     <style name="Theme.TecnivaMovies" parent="Base.Theme.TecnivaMovies" />

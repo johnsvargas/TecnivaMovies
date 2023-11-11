@@ -45,7 +45,7 @@ class SearchMovieViewModel @Inject constructor(
                 _videoList.postValue(response.results)
                 _isLoading.value = false
             } catch (e: Exception) {
-                Log.e("PokemonListViewModel", e.message.toString())
+                Log.e("Error", e.message.toString())
                 _isLoading.value = false
             }
         }
