@@ -16,7 +16,7 @@ import javax.inject.Inject
 @HiltViewModel
 class DetailMovieViewModel @Inject constructor(
     private val useCase: GetDetailMovieUseCase
-):ViewModel() {
+) : ViewModel() {
     private val _detailMovie: MutableLiveData<MovieNow> = MutableLiveData()
     val detailMovie: LiveData<MovieNow> = _detailMovie
 
@@ -28,19 +28,25 @@ class DetailMovieViewModel @Inject constructor(
     private var _typeOfVideo: String = ""
     private var _idVideo: Long = 0
 
-    fun setBundle(typeVideo:String, idVideo: Long) {
-        _typeOfVideo =  typeVideo
+    fun setBundle(typeVideo: String, idVideo: Long) {
+        _typeOfVideo = typeVideo
         _idVideo = idVideo
         getData()
     }
 
-    private fun getData(){
-        when(_typeOfVideo){
-            Constants.TYPE_MOVIE -> { getDetailMovie(_idVideo)  }
-            Constants.TYPE_TV_SERIES -> { getDetailTvSeries(_idVideo) }
+    private fun getData() {
+        when (_typeOfVideo) {
+            Constants.TYPE_MOVIE -> {
+                getDetailMovie(_idVideo)
+            }
+
+            Constants.TYPE_TV_SERIES -> {
+                getDetailTvSeries(_idVideo)
+            }
         }
     }
-    private fun getDetailMovie(id:Long){
+
+    private fun getDetailMovie(id: Long) {
         _isLoading.value = true
         viewModelScope.launch {
             try {
@@ -55,14 +61,14 @@ class DetailMovieViewModel @Inject constructor(
         }
     }
 
-    private fun getDetailTvSeries(id:Long){
+    private fun getDetailTvSeries(id: Long) {
         _isLoading.value = true
         viewModelScope.launch {
             try {
                 val response = useCase.getDetailTvSeries(id)
                 _detailTvSeries.postValue(response)
                 _isLoading.value = false
-            } catch(e: Exception) {
+            } catch (e: Exception) {
                 Log.e("Error", e.message.toString())
                 _isLoading.value = false
             }

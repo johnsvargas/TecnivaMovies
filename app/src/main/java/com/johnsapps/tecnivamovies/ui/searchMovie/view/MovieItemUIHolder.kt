@@ -2,26 +2,21 @@ package com.johnsapps.tecnivamovies.ui.searchMovie.view
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
-import com.johnsapps.tecnivamovies.data.model.MediaType
-import com.johnsapps.tecnivamovies.data.model.MediaVideo
 import com.johnsapps.tecnivamovies.databinding.ItemCardMovieBinding
+import com.johnsapps.tecnivamovies.ui.searchMovie.viewModel.uiModel.MediaVideoUI
 import com.squareup.picasso.Picasso
 
 
-class MovieItemUIHolder(view: View): ViewHolder(view) {
-    val binding = ItemCardMovieBinding.bind(view)
+class MovieItemUIHolder(view: View) : ViewHolder(view) {
+    private val binding = ItemCardMovieBinding.bind(view)
 
-    fun bind(item: MediaVideo, onClick:(MediaVideo)-> Unit ) {
+    fun bind(item: MediaVideoUI, onClick: (MediaVideoUI) -> Unit) {
         binding.run {
-            tvItemTitleMovie.text = when(item.mediaType){
-                MediaType.Movie.value -> item.originalTitle
-                MediaType.Tv.value -> item.name
-                else -> item.name
-            }
+            tvItemTitleMovie.text = item.name
             ivItemImageMovie
             Picasso
                 .get()
-                .load(item.getPosterImage())
+                .load(item.posterUrl)
                 .into(ivItemImageMovie)
             cvItemMovie.setOnClickListener { onClick(item) }
         }

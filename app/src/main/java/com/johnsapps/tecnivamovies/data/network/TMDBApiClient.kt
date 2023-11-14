@@ -9,12 +9,25 @@ import retrofit2.http.Query
 
 interface TMDBApiClient {
     @GET("search/multi")
-    suspend fun searchMovies(@Query("language") language:String="es-US", @Query("page") page:Int=1, @Query("query") query:String): ResponseMediaVideo
+    suspend fun searchMovies(
+        @Query("language") language: String = "es-US",
+        @Query("page") page: Int = 1,
+        @Query("query") query: String,
+        @Query("region") region: String = "MX"
+    ): ResponseMediaVideo
 
     @GET("movie/{id}")
-    suspend fun getDetailMovie(@Path("id" ) id:Long, @Query("language") language:String="es-MX"): MovieNow
+    suspend fun getDetailMovie(
+        @Path("id") id: Long,
+        @Query("language") language: String = "es-MX",
+        @Query("region") region: String = "MX"
+    ): MovieNow
 
     @GET("tv/{id}")
-    suspend fun getDetailTvSeries(@Path("id" ) id:Long, @Query("language") language:String="es-MX"): TvSeriesNow
+    suspend fun getDetailTvSeries(
+        @Path("id") id: Long,
+        @Query("language") language: String = "es-MX",
+        @Query("region") region: String = "MX"
+    ): TvSeriesNow
 
 }

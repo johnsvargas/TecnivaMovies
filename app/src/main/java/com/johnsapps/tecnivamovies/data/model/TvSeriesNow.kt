@@ -2,7 +2,7 @@ package com.johnsapps.tecnivamovies.data.model
 
 import com.google.gson.annotations.SerializedName
 
-data class TvSeriesNow (
+data class TvSeriesNow(
     @SerializedName("backdrop_path")
     val backdropPath: String,
 
@@ -77,7 +77,7 @@ data class TvSeriesNow (
     val voteCount: Long
 )
 
-data class CreatedBy (
+data class CreatedBy(
     val id: Long,
 
     @SerializedName("credit_id")
@@ -90,7 +90,7 @@ data class CreatedBy (
     val profilePath: String
 )
 
-data class LastEpisodeToAir (
+data class LastEpisodeToAir(
     @SerializedName("air_date")
     val airDate: String,
 
@@ -117,7 +117,7 @@ data class LastEpisodeToAir (
     val voteCount: Long
 )
 
-data class Network (
+data class Network(
     val name: String,
     val id: Long,
 
@@ -128,30 +128,24 @@ data class Network (
     val originCountry: String
 )
 
-data class Season (
+data class Season(
     @SerializedName("air_date")
     val airDate: String? = null,
-
     @SerializedName("episode_count")
     val episodeCount: Long,
-
     val id: Long,
     val name: String,
     val overview: String,
-
     @SerializedName("poster_path")
     val posterPath: String,
-
     @SerializedName("season_number")
     val seasonNumber: Long
 )
 
-data class SpokenLanguage (
+data class SpokenLanguage(
     @SerializedName("english_name")
     val englishName: String,
-
     @SerializedName("iso_639_1")
     val iso639_1: String,
-
     val name: String
 )

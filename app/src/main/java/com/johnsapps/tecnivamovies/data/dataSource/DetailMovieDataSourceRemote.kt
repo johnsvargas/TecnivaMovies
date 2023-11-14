@@ -5,13 +5,14 @@ import com.johnsapps.tecnivamovies.data.model.TvSeriesNow
 import com.johnsapps.tecnivamovies.data.network.TMDBApiClient
 import javax.inject.Inject
 
-class DetailMovieDataSource @Inject constructor(
+class DetailMovieDataSourceRemote @Inject constructor(
     private val apiClient: TMDBApiClient
 ) {
-    suspend fun getDetailMovie(id:Long): MovieNow {
+    suspend fun getDetailMovie(id: Long): MovieNow {
         return apiClient.getDetailMovie(id = id)
     }
-    suspend fun getDetailTvSeries(id:Long): TvSeriesNow {
+
+    suspend fun getDetailTvSeries(id: Long): TvSeriesNow {
         return apiClient.getDetailTvSeries(id = id)
     }
 }

@@ -15,7 +15,7 @@ import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class DetailMovieFragment:Fragment() {
+class DetailMovieFragment : Fragment() {
     private var _binding: FragmentDetailMovieBinding? = null
     private val binding get() = _binding!!
     private val viewModel: DetailMovieViewModel by viewModels()
@@ -32,7 +32,7 @@ class DetailMovieFragment:Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.setBundle(args.typeOfVideo,args.idVideo)
+        viewModel.setBundle(args.typeOfVideo, args.idVideo)
         initObservers()
         initUI(args.urlPoster, args.title)
     }
@@ -41,16 +41,16 @@ class DetailMovieFragment:Fragment() {
         viewModel.isLoading.observe(viewLifecycleOwner) {
             binding.progressBar.isVisible = it
         }
-        viewModel.detailMovie.observe(viewLifecycleOwner){
+        viewModel.detailMovie.observe(viewLifecycleOwner) {
             setDataMovieInView(it)
         }
 
-        viewModel.detailTvSeries.observe(viewLifecycleOwner){
+        viewModel.detailTvSeries.observe(viewLifecycleOwner) {
             setDataTvSerieInView(it)
         }
     }
 
-    private fun initUI(urlPoster: String, title: String){
+    private fun initUI(urlPoster: String, title: String) {
         binding.run {
             toolbar.title = title
             tvDetailOriginalTitle.text = title
@@ -60,34 +60,35 @@ class DetailMovieFragment:Fragment() {
         }
         setPosterImage(urlPoster)
     }
-    private fun setPosterImage(imageUrl: String){
+
+    private fun setPosterImage(imageUrl: String) {
         Picasso
             .get()
             .load(imageUrl)
             .into(binding.ivDetailAppBarImage)
     }
 
-    private fun setDataMovieInView(movie: MovieNow){
+    private fun setDataMovieInView(movie: MovieNow) {
         binding.run {
             tvDetailOriginalTitle.text = movie.originalTitle
             tvDetailVoteAverage.text = movie.voteAverage.toString()
             tvDetailDescription.text = movie.overview
-            var  genresText = ""
+            var genresText = ""
             movie.genres.forEach {
-                genresText += if(genresText.isEmpty()) it.name else  String.format(", ${it.name}")
+                genresText += if (genresText.isEmpty()) it.name else String.format(", ${it.name}")
             }
             tvDetailGenres.text = genresText
         }
     }
 
-    private fun setDataTvSerieInView(serie: TvSeriesNow){
+    private fun setDataTvSerieInView(serie: TvSeriesNow) {
         binding.run {
             tvDetailOriginalTitle.text = serie.originalName
             tvDetailVoteAverage.text = serie.voteAverage.toString()
             tvDetailDescription.text = serie.overview
-            var  genresText = ""
+            var genresText = ""
             serie.genres.forEach {
-                genresText += if(genresText.isEmpty()) it.name else  String.format(", ${it.name}")
+                genresText += if (genresText.isEmpty()) it.name else String.format(", ${it.name}")
             }
             tvDetailGenres.text = genresText
         }

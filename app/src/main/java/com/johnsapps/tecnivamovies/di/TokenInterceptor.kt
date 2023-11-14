@@ -6,7 +6,8 @@ import okhttp3.Response
 import java.io.IOException
 
 class TokenInterceptor : Interceptor {
-    private val token = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwMDIzOWRjZGMwODc0NmI3MTI4MDAzOTZjYjI4ZWVmNyIsInN1YiI6IjYwZjZlNjAzYzQzOWMwMDA1YzI5NTIyMyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.MLfWvoAVljf3yBXVsm7Zp5vbbZf1d6Kko0nxDQR1uS0"
+    private val token =
+        "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwMDIzOWRjZGMwODc0NmI3MTI4MDAzOTZjYjI4ZWVmNyIsInN1YiI6IjYwZjZlNjAzYzQzOWMwMDA1YzI5NTIyMyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.MLfWvoAVljf3yBXVsm7Zp5vbbZf1d6Kko0nxDQR1uS0"
 
     @Throws(IOException::class)
     override fun intercept(chain: Interceptor.Chain): Response {

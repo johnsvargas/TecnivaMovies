@@ -1,7 +1,7 @@
 package com.johnsapps.tecnivamovies
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.johnsapps.tecnivamovies.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 

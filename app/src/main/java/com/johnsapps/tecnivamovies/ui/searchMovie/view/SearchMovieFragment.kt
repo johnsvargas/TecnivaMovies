@@ -83,16 +83,15 @@ class SearchMovieFragment : Fragment() {
         adapter = MovieItemUIAdapter(
             arrayListOf(),
             onClick = { mediaVideo ->
-                val title =
-                    if (mediaVideo.title.isNullOrEmpty()) mediaVideo.name else mediaVideo.title
+                val title = mediaVideo.name
                 findNavController()
                     .navigate(
                         SearchMovieFragmentDirections
                             .actionSearchMovieFragmentToDetailMovieFragment(
                                 typeOfVideo = mediaVideo.mediaType,
                                 idVideo = mediaVideo.id,
-                                urlPoster = mediaVideo.getPosterImage(),
-                                title = title.toString()
+                                urlPoster = mediaVideo.posterUrl,
+                                title = title
                             )
                     )
             })
