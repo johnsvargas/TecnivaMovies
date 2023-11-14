@@ -1,10 +1,11 @@
 package com.johnsapps.tecnivamovies.data.model
 
 import com.google.gson.annotations.SerializedName
+import com.johnsapps.tecnivamovies.data.Constants
+import com.johnsapps.tecnivamovies.domain.model.VideoItem
 
 data class MovieNow(
     val adult: Boolean,
-
     @SerializedName("backdrop_path")
     val backdropPath: String,
     @SerializedName("belongs_to_collection")
@@ -38,6 +39,21 @@ data class MovieNow(
     @SerializedName("vote_count")
     val voteCount: Long
 )
+
+fun MovieNow.map(): VideoItem {
+    return VideoItem(
+        id = this.id,
+        title = this.title,
+        originalTitle = this.originalTitle,
+        urlPoster = Constants.url + this.posterPath,
+        voteAverage = this.voteAverage,
+        description = this.overview,
+        genres = this.genres.map { it.name },
+        originalLanguage = this.originalLanguage,
+        runtime = this.runtime,
+        homepage = this.homepage,
+    )
+}
 
 data class BelongsToCollection(
     val id: Long,

@@ -1,4 +1,4 @@
-package com.johnsapps.tecnivamovies.ui.detailMovie
+package com.johnsapps.tecnivamovies.ui.detailMovie.view
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,9 +8,9 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
-import com.johnsapps.tecnivamovies.data.model.MovieNow
-import com.johnsapps.tecnivamovies.data.model.TvSeriesNow
 import com.johnsapps.tecnivamovies.databinding.FragmentDetailMovieBinding
+import com.johnsapps.tecnivamovies.ui.detailMovie.viewModel.DetailMovieViewModel
+import com.johnsapps.tecnivamovies.ui.detailMovie.viewModel.uiModel.VideoUI
 import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -32,7 +32,7 @@ class DetailMovieFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.setBundle(args.typeOfVideo, args.idVideo)
+        viewModel.getDetailVideo(args.idVideo, args.typeOfVideo)
         initObservers()
         initUI(args.urlPoster, args.title)
     }
@@ -41,12 +41,8 @@ class DetailMovieFragment : Fragment() {
         viewModel.isLoading.observe(viewLifecycleOwner) {
             binding.progressBar.isVisible = it
         }
-        viewModel.detailMovie.observe(viewLifecycleOwner) {
-            setDataMovieInView(it)
-        }
-
-        viewModel.detailTvSeries.observe(viewLifecycleOwner) {
-            setDataTvSerieInView(it)
+        viewModel.detailVideo.observe(viewLifecycleOwner) {
+            setDataVideoInView(it)
         }
     }
 
@@ -68,29 +64,12 @@ class DetailMovieFragment : Fragment() {
             .into(binding.ivDetailAppBarImage)
     }
 
-    private fun setDataMovieInView(movie: MovieNow) {
+    private fun setDataVideoInView(videoUI: VideoUI) {
         binding.run {
-            tvDetailOriginalTitle.text = movie.originalTitle
-            tvDetailVoteAverage.text = movie.voteAverage.toString()
-            tvDetailDescription.text = movie.overview
-            var genresText = ""
-            movie.genres.forEach {
-                genresText += if (genresText.isEmpty()) it.name else String.format(", ${it.name}")
-            }
-            tvDetailGenres.text = genresText
-        }
-    }
-
-    private fun setDataTvSerieInView(serie: TvSeriesNow) {
-        binding.run {
-            tvDetailOriginalTitle.text = serie.originalName
-            tvDetailVoteAverage.text = serie.voteAverage.toString()
-            tvDetailDescription.text = serie.overview
-            var genresText = ""
-            serie.genres.forEach {
-                genresText += if (genresText.isEmpty()) it.name else String.format(", ${it.name}")
-            }
-            tvDetailGenres.text = genresText
+            tvDetailOriginalTitle.text = videoUI.originalTitle
+            tvDetailVoteAverage.text = videoUI.voteAverage
+            tvDetailDescription.text = videoUI.description
+            tvDetailGenres.text = videoUI.genres
         }
     }
 
