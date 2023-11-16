@@ -26,10 +26,6 @@ class SearchMovieViewModel @Inject constructor(
     private var _queryToSearch = ""
     var isLastPage = false
 
-    fun setUp() {
-
-    }
-
     fun searchMovie(queryToSearch: String) {
         _queryToSearch = queryToSearch
         numPage = 1
